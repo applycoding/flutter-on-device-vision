@@ -11,9 +11,9 @@ class SettingsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final DetectionSettings settings = ref.watch(settingsProvider);
     final int percent = (settings.confidenceThreshold * 100).round();
-    return ColoredBox(
-      color: visionInk,
-      child: SafeArea(
+    return Scaffold(
+      backgroundColor: visionInk,
+      body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
           children: <Widget>[
