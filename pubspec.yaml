@@ -1,0 +1,26 @@
+name: on_device_vision
+description: Portfolio demo of on-device object detection for Arpan Bom.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.5
+
+dependencies:
+  camera: ^0.12.1
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^3.4.3
+  image: ^4.12.0
+  image_picker: ^1.2.1
+  tflite_flutter: ^0.12.1
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/models/
