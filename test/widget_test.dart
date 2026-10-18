@@ -1,6 +1,5 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
@@ -131,6 +130,25 @@ void main() {
   testWidgets(
     'live, gallery, and settings navigation stays available without a camera',
     (WidgetTester tester) async {
+      const MethodChannel cameraChannel = MethodChannel(
+        'plugins.flutter.io/camera',
+      );
+      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        cameraChannel,
+        (MethodCall call) async {
+          if (call.method == 'availableCameras') {
+            return <Map<String, Object?>>[];
+          }
+          return null;
+        },
+      );
+      addTearDown(() {
+        tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          cameraChannel,
+          null,
+        );
+      });
+
       await tester.pumpWidget(
         ProviderScope(
           retry: (int retryCount, Object error) => null,
